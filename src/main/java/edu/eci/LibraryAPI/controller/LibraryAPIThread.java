@@ -19,13 +19,15 @@ import javax.mail.internet.MimeMessage;
 public class LibraryAPIThread extends Thread {
     
     private int idL;
-    private String nombreLibro;
     private String email;
+    private String mensaje;
+    private String notificacion;
 
-    public LibraryAPIThread(int idL, String nombreLibro, String email) {
+    public LibraryAPIThread(int idL, String email, String notificacion, String mensaje) {
         this.idL = idL;
-        this.nombreLibro = nombreLibro;
         this.email = email;
+        this.mensaje = mensaje;
+        this.notificacion = notificacion;
     }
 
     @Override
@@ -55,9 +57,9 @@ public class LibraryAPIThread extends Thread {
         try {
             message.setFrom(new InternetAddress(emailFrom));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-            message.setHeader("Notificacion", "Finalizacion creacion libro");
-            message.setSubject("Notificación: Creacion de libro finalizada.");
-            message.setText("Buen dia.\n\nEl libro '"+nombreLibro+"' se ha añadido correctamente a la libreria '"+idL+"'.\n\nLibraryAPI\nCarlos Andrés Medina Rivas");
+            message.setHeader("Notificacion", "Notificacion LibraryAPI");
+            message.setSubject("Notificación: "+notificacion+"");
+            message.setText("Buen dia.\n\n"+mensaje+"LibraryAPI\nCarlos Andrés Medina Rivas");
             //Enviar el correo apenas el thread termine el proceso.
             Transport.send(message);
         } catch (AddressException ex) {
