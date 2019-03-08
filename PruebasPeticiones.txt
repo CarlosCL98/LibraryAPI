@@ -1,0 +1,17 @@
+-----Prueba de creación de una librería.
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries -d '{"id":3,"nombre":"LibreriaNuevaYork","direccion":"Cra 7a 5-7 oriente","telefono":"4749447","libros":{"1":{"id":1,"nombre":"What are you doing here?","autor":"Rick Riordan","sinopsis":"Some special book for special people."}}}'
+
+-----Prueba de creación de un libro en una librería.
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries/1 -d '{"id":4,"nombre":"No lo se, pero y tu?","autor":"Andres Lopez","sinopsis":"Vida amorosa de dos amigos"}'
+
+-----Prueba de eliminación de librería con libros.
+curl -i -X DELETE -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries -d '1'
+
+-----Prueba de eliminación de librería sin libros.
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries -d '{"id":4,"nombre":"LibreriaNuevaZelanda","direccion":"Cra 7a 5-7 oriente","telefono":"4749447","libros":{}}'
+
+curl -i -X DELETE -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries -d '4'
+
+-----Prueba de envío de correo
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/libraries/1/carlos.medina-ri@mail.escuelaing.edu.co -d '{"id":5,"nombre":"Sera que el mundo es azul","autor":"Francisco Torres","sinopsis":"En un mundo lleno de traición, se desata una fuerza no tan limpia que quiere acabar con todos."}'
+

@@ -33,7 +33,10 @@ public class LibraryApiController {
 
     @Autowired
     LibraryApiServices libraryApiServices;
-
+    
+    /*
+      ######################### Peticiones GET #########################
+    */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Libreria>> manejadorGetRecursoLibrerias() throws LibraryApiNoCotentException {
         try {
@@ -75,6 +78,9 @@ public class LibraryApiController {
         }
     }
     
+    /*
+      ######################### Peticiones POST #########################
+    */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> manejadorPostRecursoLibreria(@RequestBody Libreria library) throws LibraryApiNotFoundException {
         try {
@@ -107,6 +113,9 @@ public class LibraryApiController {
         }
     }
     
+    /*
+      ######################### Peticiones DELETE #########################
+    */
     @RequestMapping(method = RequestMethod.DELETE)
     public ResponseEntity<?> manejadorDeleteRecursoLibro(@RequestBody int idL) throws LibraryApiNotFoundException, LibraryApiUnauthorizedException {
         try {
