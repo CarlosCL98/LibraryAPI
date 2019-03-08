@@ -5,7 +5,6 @@ import edu.eci.LibraryAPI.model.Libreria;
 import edu.eci.LibraryAPI.model.Libro;
 import edu.eci.LibraryAPI.persistence.InMemoryLibraryApiPersistence;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class LibraryApiServices {
     
     private Map<Integer, Libreria> libraries = new HashMap<>();
     
-    public List<Libreria> getAllLibraries() {
+    public List<Libreria> getAllLibraries() throws LibraryApiException {
         return libraryApiPersistence.getAllLibraries();
     }
     

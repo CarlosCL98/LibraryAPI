@@ -24,7 +24,7 @@ public class InMemoryLibraryApiPersistence {
         // Cargar datos.
         Map<Integer, Libro> books1 = new HashMap<>();
         Libro book1 = new Libro(1, "Percy Jackson y el ladron del rayo", "Rick Riordan", "Libro mitologico de dioses sobre la vida de Zeus y Poseidon.");
-        Libro book2 = new Libro(2, "Ensayo sobre la ceguera", "Jose Saramago", "Basado en una historia ficticia, en donde lsa peronas que comienzan a quedarse ciegas, deben luchas contra ello.");
+        Libro book2 = new Libro(2, "Ensayo sobre la ceguera", "Jose Saramago", "Basado en una historia ficticia, en donde las peronas que comienzan a quedarse ciegas, deben luchas contra ello.");
         Libro book3 = new Libro(3, "Harry Potter y las reliquias de la muerte", "", "Mundo de magia, en el que <harry debe poder sobrevivir y salvar a sus amigos.");
         books1.put(1, book1);
         books1.put(2, book2);
@@ -34,8 +34,8 @@ public class InMemoryLibraryApiPersistence {
         
         Map<Integer, Libro> books2 = new HashMap<>();
         Libro book4 = new Libro(1, "El caballo de troya", "Luis Sarmiento", "Un joven viaja al pasado a encontrarse con sus antepasados.");
-        Libro book5 = new Libro(2, "Ensayo sobre la ceguera", "Jose Saramago", "Basado en una historia ficticia, en donde lsa peronas que comienzan a quedarse ciegas, deben luchas contra ello.");
-        Libro book6 = new Libro(3, "Harry Potter y las reliquias de la muerte", "", "Mundo de magia, en el que <harry debe poder sobrevivir y salvar a sus amigos.");
+        Libro book5 = new Libro(2, "El espacio de los muertos", "Franciso Trivino", "No saben lo que les esperar. Es el cielo o el infierno.");
+        Libro book6 = new Libro(3, "La sombra del viento", "Carlos Ruiz Zafon", "Vivencias reales de personas durante la segunda guerra mundial.");
         books2.put(1, book4);
         books2.put(2, book5);
         books2.put(3, book6);
@@ -44,8 +44,11 @@ public class InMemoryLibraryApiPersistence {
 
     }
     
-    public List<Libreria> getAllLibraries() {
+    public List<Libreria> getAllLibraries() throws LibraryApiException {
         List<Libreria> lb = new ArrayList<>();
+        if (libraries.isEmpty()) {
+            throw new LibraryApiException("No hay librerias.");
+        }
         for (Integer libreria : libraries.keySet()) {
             lb.add(libraries.get(libreria));
         }
@@ -112,7 +115,7 @@ public class InMemoryLibraryApiPersistence {
     public void deleteLibrary(int id) throws LibraryApiException {
         Libreria library = getLibraryById(id);
         Map<Integer, Libro> books = library.getLibros();
-        if (books.isEmpty()) {
+        if (!books.isEmpty()) {
             throw new LibraryApiException("La libreria '"+id+"' no puede ser eliminada, porque contiene libros.");
         }
         libraries.remove(id);
